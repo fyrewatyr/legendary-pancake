@@ -29,7 +29,7 @@
 
   <% end %>
 
-  <br />
+  <br /><br />
 
   <div class="float-right">
     <% if current_user && current_user == @place.user%>
@@ -41,22 +41,17 @@
 
 <div class="clear"></div>
 
-
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
-  Add a comment
-</button>
-
 <!-- Modal -->
-<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Add a comment</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+          <span aria-hidden="true">×</span>
         </button>
+        <h4 class="modal-title" id="myModalLabel">Add A Comment</h4>
       </div>
+
       <%= simple_form_for @comment, url: place_comments_path(@place) do |f| %>
         <div class="modal-body">
           <%= f.input :message %>
@@ -71,10 +66,16 @@
     </div>
   </div>
 </div>
+<br />
+<div class=col-10 offset-1">
+  <h1 class="float-left">Comments</h1>
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary loginbutton float-right" data-toggle="modal" data-target="#myModal">Add a comment</button>
+</div>
 
-<h1>Comments</h1>
-  <% @place.comments.each do |comment| %>
-    <div>
+  <div class="row clear col-10 offset-1">
+    <% @place.comments.each do |comment| %>
+    <div class="col-12 col-sm-6">
       <blockquote>
         <% if comment.humanized_rating.present? %>
           <b><%= comment.humanized_rating %></b> -
@@ -84,3 +85,5 @@
       </blockquote>
     </div>
   <% end %>
+</div>
+
